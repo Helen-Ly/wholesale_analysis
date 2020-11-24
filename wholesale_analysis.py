@@ -24,14 +24,32 @@ buyer_name = []
 # Create dictionary for each buyer
 buyer_dictionary = {}
 
-# Create variables to hold winning buyer
+# Create variables to hold top buyer
 top_buyer = ""
 top_buyer_count = 0
 top_buyer_percentage = 0
 
+######################################
+# Determine unique vehicles sold
+# Determine how many were sold for each model
+# Determine percentage told
+# Determine top sold vehicle
+######################################
+
+# Create list for unique vehicles purchased
+purchased_vehicle = []
+
+# Create a dictionary for unique vehicles purchased
+purchased_vehicle_dictionary = {}
+
+# Create variables top purchased vehicle
+top_vehicle = ""
+top_vehicle_count = 0
+top_vehicle_percentage = 0
+
 with open(file_to_load, "r") as wholesale_data:
 
-    # Read the dat
+    # Read the data
     file_reader = csv.reader(wholesale_data)
 
     # Show header 
@@ -47,6 +65,9 @@ with open(file_to_load, "r") as wholesale_data:
         # Variable to pull out buyer name
         buyer = row[2]
 
+        # Variable to pull out purchased vehicle
+        vehicle = row[1]
+
         # Append to the buyer_name list
         if buyer not in buyer_name:
 
@@ -58,6 +79,19 @@ with open(file_to_load, "r") as wholesale_data:
 
         # Add count for buyer in dictionary
         buyer_dictionary[buyer] += 1
+
+        # Sort through vehicles to add unique one to purchased_vehicle
+        if vehicle not in purchased_vehicle:
+
+            # Append vehicle if not in list
+            purchased_vehicle.append(vehicle)
+
+            # Initialize vehicle dictionary
+            purchased_vehicle_dictionary[vehicle] = 0
+
+        # Add count to vehicle in dictionary every time it appears in the loop
+        purchased_vehicle_dictionary[vehicle] += 1
+
 
 with open(file_to_save, "w") as text_file:
     
@@ -97,11 +131,16 @@ with open(file_to_save, "w") as text_file:
             top_buyer_percentage = ws_buyer_percentage
 
     top_buyer_summary = (
-        f"\n-----------------------------\n"
         f"Top Buyer: {top_buyer}\n"
         f"Top Buyer Count: {top_buyer_count:,}\n"
         f"Top Buyer Percentage: {top_buyer_percentage:.1f}%\n"
     )
+
+    # Write summary into text_file
+    text_file.write(top_buyer_summary)
+
+    
+    # Print statements to check each point/debug
 
     # Print out summary
     print(top_buyer_summary)
@@ -115,15 +154,11 @@ with open(file_to_save, "w") as text_file:
     # Print out buyer_dictionary
     print(buyer_dictionary)
 
+    # Print vehicle list and dictionary
+    print(purchased_vehicle)
+    print(purchased_vehicle_dictionary)
+    
 
-
-
-######################################
-# Determine unique vehicles sold
-# Determine how many were sold for each model
-# Determine percentage told
-# Determine top sold vehicle
-######################################
 
 ######################################
 # Write out results to text file

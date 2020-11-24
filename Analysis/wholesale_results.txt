@@ -5,3 +5,6 @@
  Summary: Data taken from wholesale transactions from 2018-2020 
 
 -------------------------
+Top Buyer: ADESA
+Top Buyer Count: 1,079
+Top Buyer Percentage: 35.0%
