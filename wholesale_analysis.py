@@ -93,14 +93,18 @@ with open(file_to_load, "r") as wholesale_data:
         purchased_vehicle_dictionary[vehicle] += 1
 
 
+######################################
+# Write out results to text file
+######################################
+
 with open(file_to_save, "w") as text_file:
     
     # Create an introduction
     introduction= (
         f"\n Wholesale Results \n"
         f"-------------------------\n"
-        f"\n Summary: Data taken from wholesale transactions from 2018-2020 \n"
-        f"\n-------------------------\n"
+        f"Summary: Data taken from wholesale transactions from 2018-2020 \n"
+        f"-------------------------\n"
     )
 
     # Print out introduction
@@ -134,12 +138,42 @@ with open(file_to_save, "w") as text_file:
         f"Top Buyer: {top_buyer}\n"
         f"Top Buyer Count: {top_buyer_count:,}\n"
         f"Top Buyer Percentage: {top_buyer_percentage:.1f}%\n"
+        f"------------------------\n"
     )
 
     # Write summary into text_file
     text_file.write(top_buyer_summary)
 
-    
+    # Loop through vehicle dictionary
+    for vehicle in purchased_vehicle_dictionary:
+
+        # Pull value for each vehicle
+        car = purchased_vehicle_dictionary[vehicle]
+
+        # Calculate percentage
+        vehicle_percentage = car / total_entries * 100
+
+        # Determine top purchased vehicle
+        if (car > top_vehicle_count) and (vehicle_percentage > top_vehicle_percentage):
+
+            # Attach values to variables
+            top_vehicle = vehicle
+
+            top_vehicle_count = car
+
+            top_vehicle_percentage = vehicle_percentage
+
+    top_vehicle_summary = (
+        f"Top Vehicle Purchased: {top_vehicle}\n"
+        f"Top Vehicle Purchased Count: {top_vehicle_count:,}\n"
+        f"Top Vehicle Purchased Percentage: {top_vehicle_percentage:.1f}\n"
+        f"--------------------------\n"
+    )
+
+    # Write summary into text file
+    text_file.write(top_vehicle_summary)
+
+    '''
     # Print statements to check each point/debug
 
     # Print out summary
@@ -157,9 +191,5 @@ with open(file_to_save, "w") as text_file:
     # Print vehicle list and dictionary
     print(purchased_vehicle)
     print(purchased_vehicle_dictionary)
-    
+    '''
 
-
-######################################
-# Write out results to text file
-######################################

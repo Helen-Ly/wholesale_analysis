@@ -1,10 +1,13 @@
 
  Wholesale Results 
 -------------------------
-
- Summary: Data taken from wholesale transactions from 2018-2020 
-
+Summary: Data taken from wholesale transactions from 2018-2020 
 -------------------------
 Top Buyer: ADESA
 Top Buyer Count: 1,079
 Top Buyer Percentage: 35.0%
+------------------------
+Top Vehicle Purchased: F150
+Top Vehicle Purchased Count: 1,598
+Top Vehicle Purchased Percentage: 51.8
+--------------------------
